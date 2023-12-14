@@ -4,7 +4,7 @@ import Logo from "../NavBar/Logo";
 export default function Description() {
   return (
     <div className="border-r border-2bOpacity pl-[37rem] pr-[6.4rem] pt-[6rem] pb-[4rem]">
-      <Logo mb="mb-[2rem]" />
+      <Logo mb="2" />
 
       <p className="font-serif text-2xl leading-9 w-[80%] mb-[2.4rem]">
         Daily Dose is the three-time #1 New York Times bestselling author of The
@@ -19,7 +19,7 @@ export default function Description() {
         to="/about"
         className="group flex items-center uppercase font-bold text-xl gap-6 mb-[16rem]"
       >
-        <div className="bg-[rgb(70,66,66)] group-hover:bg-[rgb(242,104,34)] text-[rgb(255,255,255, 0.2)] rounded-[100%] py-2 px-2">
+        <div className="bg-gray-100 group-hover:bg-orange-50 text-white rounded-[100%] py-2 px-2">
           &rarr;
         </div>
         Learn more about daily dose

@@ -1,15 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import Loader from "./components/Loader/Loader";
 
-import Root from "./pages/Root";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import Articles from "./pages/Articles";
-import Books from "./pages/Books";
-import Courses from "./pages/Courses";
-import Newsletter from "./pages/Newsletter";
-import Podcast from "./pages/Podcast";
-import Login from "./pages/Login";
-import Singup from "./pages/Singup";
+const Root = lazy(() => import("./pages/Root"));
+const Home = lazy(() => import("./pages/Home"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Articles = lazy(() => import("./pages/Articles"));
+const Books = lazy(() => import("./pages/Books"));
+const Courses = lazy(() => import("./pages/Courses"));
+const Newsletter = lazy(() => import("./pages/Newsletter"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Article = lazy(() => import("./pages/Article"));
 
 const router = createBrowserRouter([
   {
@@ -19,35 +21,67 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/:articleId",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Article />
+          </Suspense>
+        ),
       },
       {
         path: "articles",
-        element: <Articles />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Articles />
+          </Suspense>
+        ),
       },
       {
         path: "books",
-        element: <Books />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Books />
+          </Suspense>
+        ),
       },
       {
         path: "courses",
-        element: <Courses />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Courses />
+          </Suspense>
+        ),
       },
       {
         path: "newsletter",
-        element: <Newsletter />,
-      },
-      {
-        path: "podcast",
-        element: <Podcast />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Newsletter />
+          </Suspense>
+        ),
       },
       {
         path: "log-in",
-        element: <Login />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Login />
+          </Suspense>
+        ),
       },
       {
         path: "sign-up",
-        element: <Singup />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Signup />
+          </Suspense>
+        ),
       },
     ],
   },

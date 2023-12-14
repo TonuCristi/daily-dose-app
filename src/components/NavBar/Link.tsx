@@ -5,11 +5,11 @@ export default function Link({ link }: { link: string }) {
     <li className="px-8 py-3">
       <NavLink
         to={`/${link}`}
-        className={`text-2xl uppercase hover:border-b-[1px] ${({
-          isActive,
-        }: {
-          isActive: boolean;
-        }) => (isActive ? "active" : "")}`}
+        className={({ isActive }: { isActive: boolean }) =>
+          `text-2xl uppercase ${
+            isActive ? `border-b-[1px]` : `hover:border-b-[1px]`
+          }`
+        }
       >
         {link}
       </NavLink>
