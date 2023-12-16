@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         "orange-50": "rgb(242,104,34)",
+        "gray-50": "rgb(153,153,153)",
         "gray-100": "rgb(70,66,66)",
         "gray-150": "rgb(44,43,43)",
         "gray-200": "rgb(37,33,33)",
@@ -14,7 +15,11 @@ export default {
       },
       borderColor: {
         "2bOpacity": "rgb(255, 255, 255, 0.2)",
+        loader: "rgb(73, 80, 87,0.7)",
         "gray-50": "rgb(153,153,153)",
+        "gray-100": "rgb(70,66,66)",
+        "gray-150": "rgb(44,43,43)",
+        "gray-200": "rgb(37,33,33)",
       },
       fontSize: {
         sm: "0.8rem",

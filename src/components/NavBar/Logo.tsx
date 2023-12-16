@@ -4,7 +4,7 @@ export default function Logo({ mb = "" }: { mb?: string }) {
   return (
     <NavLink
       to="/"
-      className={`inline-block text-3xl uppercase font-semibold tracking-wide mb-[${mb}rem]`}
+      className={`inline-block text-3xl uppercase font-semibold tracking-wide ${mb}`}
     >
       Daily dose
     </NavLink>

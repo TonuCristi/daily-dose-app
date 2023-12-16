@@ -9,13 +9,17 @@ import {
 
 import supabase from "../supabase/supabase";
 
-type ArticlesContext = {
+interface ArticlesContext {
   data: Article[];
   isLoading: boolean;
   error: string;
   article: Article;
   getArticle: (title: string | undefined) => Promise<void>;
-};
+  categories: string[];
+  getCategories: () => Promise<void>;
+  articlesDate: number[];
+  getDates: () => Promise<void>;
+}
 
 type Article = {
   id: number;
@@ -25,6 +29,7 @@ type Article = {
   text: string;
   category: string;
   query: string;
+  author: string;
 };
 
 const ArticlesContext = createContext<ArticlesContext>({} as ArticlesContext);
@@ -36,11 +41,14 @@ export default function ArticlesProvider({
 }) {
   const [data, setData] = useState<Article[]>([]);
   const [article, setArticle] = useState<Article>({} as Article);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [articlesDate, setArticlesDate] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
     async function getArticles() {
+      setError("");
       setIsLoading(true);
 
       try {
@@ -62,26 +70,79 @@ export default function ArticlesProvider({
   const getArticle = useCallback(async function getArticle(
     title: string | undefined
   ) {
+    setError("");
+    setIsLoading(true);
+
     try {
       const { data, error } = await supabase
         .from("articles")
-        .select("id, userId, created_at, title, query, text, category")
+        .select("id, userId, created_at, title, query, text, category, author")
         .eq("query", title?.split("-").join(" "));
-
-      console.log(data);
 
       if (error) throw error;
 
       setArticle(data[0]);
     } catch (error) {
       setError("Something went wrong...");
+    } finally {
+      setIsLoading(false);
     }
   },
   []);
 
+  const getCategories = useCallback(async function getCategories() {
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("category");
+
+      if (error) throw error;
+
+      setCategories(data.map((item) => item.category));
+    } catch (error) {
+      setError("Something went wrong...");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const getDates = useCallback(async function getDates() {
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("created_at");
+
+      if (error) throw error;
+
+      setArticlesDate(
+        data.map((item) => new Date(item.created_at).getFullYear())
+      );
+    } catch (error) {
+      setError("Something went wrong...");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   return (
     <ArticlesContext.Provider
-      value={{ data, isLoading, error, article, getArticle }}
+      value={{
+        data,
+        isLoading,
+        error,
+        article,
+        getArticle,
+        categories,
+        getCategories,
+        articlesDate,
+        getDates,
+      }}
     >
       {children}
     </ArticlesContext.Provider>

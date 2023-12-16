@@ -9,6 +9,8 @@ type Props = {
   textT?: string;
   px?: string;
   py?: string;
+  border?: string;
+  hBorder?: string;
 };
 
 export default function Button({
@@ -22,10 +24,12 @@ export default function Button({
   textT = "uppercase",
   px = "px-0",
   py = "py-0",
+  border = "",
+  hBorder = "",
 }: Props) {
   return (
     <button
-      className={`${color} ${bg} hover:${hColor} hover:${hBg} ${px} ${py} rounded-[2.7rem] ${fS} ${textT} ${fW} h-full`}
+      className={`${color} ${bg} hover:${hColor} hover:${hBg} ${px} ${py} rounded-[2.7rem] ${fS} ${textT} ${fW} ${border} border-transparent ${hBorder} h-full`}
     >
       {children}
     </button>

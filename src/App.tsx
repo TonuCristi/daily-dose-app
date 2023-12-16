@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Loader from "./components/Loader/Loader";
 
 const Root = lazy(() => import("./pages/Root"));
 const Home = lazy(() => import("./pages/Home"));
@@ -12,6 +11,8 @@ const Newsletter = lazy(() => import("./pages/Newsletter"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Article = lazy(() => import("./pages/Article"));
+
+import Loader from "./components/Loader/Loader";
 
 const router = createBrowserRouter([
   {
